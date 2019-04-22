@@ -13,6 +13,8 @@
  
 <script type="text/javascript">
     function processImage(x) {
+
+        console.log(x);
         // **********************************************
         // *** Update or verify the following values. ***
         // **********************************************
