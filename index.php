@@ -68,6 +68,7 @@
             alert(errorString);
         });
     };
+
 </script>
  
 <h1>Analyze image:</h1>
@@ -76,7 +77,7 @@ Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
     value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
-<button onclick="processImage()">Upload Image</button>
+<button onclick="uploadImage()">Upload Image</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
     <div id="jsonOutput" style="width:600px; display:table-cell;">
@@ -121,8 +122,6 @@ if (!isset($_GET["Cleanup"])) {
         // Create container.
         $blobClient->createContainer($containerName, $createContainerOptions);
         // Getting local file so that we can upload it to Azure.
-        echo "Upload Here : ";
-        echo "<input type=text name=inputImage id=inputImage/>";
         // $myfile = fopen($fileToUpload, "w") or die("Unable to open file!");
         // fclose($myfile);
         
@@ -133,6 +132,14 @@ if (!isset($_GET["Cleanup"])) {
         
         // $content = fopen($fileToUpload, "r");
         //Upload blob
+        ?>
+        <input type="text" name="inputImage2" id="inputImage2"
+        value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
+        <button onclick=<?php
+            $blobClient->createBlockBlob($containerName, $_GET['inputImage2'], $_GET['inputImage2']);
+         ?>>
+
+        <?php
 //         $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
 //         // List blobs.
         $listBlobsOptions = new ListBlobsOptions();
