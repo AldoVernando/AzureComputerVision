@@ -121,9 +121,9 @@ $containerName = "blockblobs";
         echo "<br />";
 
         if (isset($_POST['submit'])) {
-            $fileToUpload = strtolower($_FILES["fileUploaded"]["name"]);
-            $content = fopen($_FILES["fileUploaded"]["d_name"], "r");
-            $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
+            $file = strtolower($_FILES["fileUploaded"]["name"]);
+            $content = fopen($_FILES["fileUploaded"]["tmp_name"], "r");
+            $blobClient->createBlockBlob($containerName, $file, $content);
             header("Location: index.php");
         }
         
