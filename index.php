@@ -110,18 +110,18 @@ $connectionString = "DefaultEndpointsProtocol=https;AccountName=submission;Accou
 // Create blob client.
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 // $fileToUpload = "HelloWorld.txt";
-if (!isset($_GET["Cleanup"])) {
+// if (!isset($_GET["Cleanup"])) {
     // Create container options object.
-    $createContainerOptions = new CreateContainerOptions();
+    // $createContainerOptions = new CreateContainerOptions();
     
-    $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
-    // Set container metadata.
-    $createContainerOptions->addMetaData("key1", "value1");
-    $createContainerOptions->addMetaData("key2", "value2");
+    // $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
+    // // Set container metadata.
+    // $createContainerOptions->addMetaData("key1", "value1");
+    // $createContainerOptions->addMetaData("key2", "value2");
     $containerName = "blockblobs";
     try {
         // Create container.
-        $blobClient->createContainer($containerName, $createContainerOptions);
+        // $blobClient->createContainer($containerName, $createContainerOptions);
         // Getting local file so that we can upload it to Azure.
         // $myfile = fopen($fileToUpload, "w") or die("Unable to open file!");
         // fclose($myfile);
