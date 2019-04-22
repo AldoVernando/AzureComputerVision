@@ -141,19 +141,38 @@ $blobClient = BlobRestProxy::createBlobService($connectionString);
         $listBlobsOptions = new ListBlobsOptions();
         $listBlobsOptions->setPrefix("");
         echo "These are the blobs present in the container: ";
+        echo "<br>"; 
         do{
             $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
+            ?>
+
+            <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>URL</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
             foreach ($result->getBlobs() as $blob)
             {
                 ?>
                 
-                <?php echo $blob->getName() ?>
-				<?php echo $blob->getUrl() ?>
-				
-				<input type="submit" name="submit" value="Analyze Image">
-
+                <tr>
+                    <td><?php echo $blob->getName() ?></td>
+                    <td><?php echo $blob->getUrl() ?></td>
+                    <td><input type="submit" name="submit" value="Analyze Image"></td>
+                </tr>
                 <?php
             }
+            ?>
+            </tbody>
+            </table>
+
+            <?php
+
         
             $listBlobsOptions->setContinuationToken($result->getContinuationToken());
         } while($result->getContinuationToken());
