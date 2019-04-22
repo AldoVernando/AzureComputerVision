@@ -150,7 +150,7 @@ $containerName = "blockblobs";
                 <tr>
                     <td><?php echo $blob->getName() ?></td>
                     <td><?php echo $blob->getUrl() ?></td>
-                    <td><button name="submit" onclick="processImage(<?php echo $blob->getUrl() ?>)">Analyze Image</button></td>
+                    <td><button name="submit" onclick="processImage('<?php echo $blob->getUrl() ?>')">Analyze Image</button></td>
                 </tr>
                 <?php
             }
