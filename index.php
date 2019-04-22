@@ -135,11 +135,14 @@ if (!isset($_GET["Cleanup"])) {
         ?>
         <input type="text" name="inputImage2" id="inputImage2"
         value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
-        <button onclick=<?php
+        <button onclick=
+        "<?php
             $blobClient->createBlockBlob($containerName, $_GET['inputImage2'], $_GET['inputImage2']);
-         ?>>
+         ?>">
 
         <?php
+
+        echo $_GET['inputImage2'];
 //         $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
 //         // List blobs.
         $listBlobsOptions = new ListBlobsOptions();
