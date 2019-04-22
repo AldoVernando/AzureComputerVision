@@ -12,7 +12,7 @@
 <body>
  
 <script type="text/javascript">
-    function processImage() {
+    function processImage(x) {
         // **********************************************
         // *** Update or verify the following values. ***
         // **********************************************
@@ -39,7 +39,7 @@
         };
  
         // Display the image.
-        var sourceImageUrl = document.getElementById("inputImage").value;
+        var sourceImageUrl = x;
         document.querySelector("#sourceImage").src = sourceImageUrl;
  
         // Make the REST API call.
@@ -150,7 +150,7 @@ $containerName = "blockblobs";
                 <tr>
                     <td><?php echo $blob->getName() ?></td>
                     <td><?php echo $blob->getUrl() ?></td>
-                    <td><button name="submit" onclick="processImage()">Analyze Image</button></td>
+                    <td><button name="submit" onclick="processImage(<?php echo $blob->getUrl() ?>)">Analyze Image</button></td>
                 </tr>
                 <?php
             }
