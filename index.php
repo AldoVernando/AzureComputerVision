@@ -75,9 +75,10 @@
 Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
 Image to analyze:
-<input type="text" name="inputImage" id="inputImage"
-    value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
-<button onclick="uploadImage()">Upload Image</button>
+<form action="index.php" method="POST" enctype="multipart/form-data">
+    <input type="file" name="fileUploaded" accept=".jpg,.jpeg,.png">
+	<input type="submit" name="submit" value="Upload Image">
+</form>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
     <div id="jsonOutput" style="width:600px; display:table-cell;">
@@ -132,17 +133,11 @@ if (!isset($_GET["Cleanup"])) {
         
         // $content = fopen($fileToUpload, "r");
         //Upload blob
-        ?>
-        <input type="text" name="inputImage2" id="inputImage2"
-        value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
-        <button onclick=
-        "<?php
-            $blobClient->createBlockBlob($containerName, $_GET['inputImage2'], $_GET['inputImage2']);
-         ?>">
-
-        <?php
-
-        echo $_GET['inputImage2'];
+        if (isset($_POST['submit'])) {
+            $fileToUpload = strtolower($_FILES["fileUploaded"]["name"]);
+            $content = fopen($_FILES["fileUploaded"]["name"], "r");
+            $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
+        }
 //         $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
 //         // List blobs.
         $listBlobsOptions = new ListBlobsOptions();
