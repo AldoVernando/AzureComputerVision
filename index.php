@@ -76,7 +76,7 @@ Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 Image to analyze:
 <input type="text" name="inputImage" id="inputImage"
     value="http://upload.wikimedia.org/wikipedia/commons/3/3c/Shaki_waterfall.jpg" />
-<button onclick="processImage()">Analyze image</button>
+<button onclick="processImage()">Upload Image</button>
 <br><br>
 <div id="wrapper" style="width:1020px; display:table;">
     <div id="jsonOutput" style="width:600px; display:table-cell;">
@@ -111,20 +111,7 @@ $blobClient = BlobRestProxy::createBlobService($connectionString);
 if (!isset($_GET["Cleanup"])) {
     // Create container options object.
     $createContainerOptions = new CreateContainerOptions();
-    // Set public access policy. Possible values are
-    // PublicAccessType::CONTAINER_AND_BLOBS and PublicAccessType::BLOBS_ONLY.
-    // CONTAINER_AND_BLOBS:
-    // Specifies full public read access for container and blob data.
-    // proxys can enumerate blobs within the container via anonymous
-    // request, but cannot enumerate containers within the storage account.
-    //
-    // BLOBS_ONLY:
-    // Specifies public read access for blobs. Blob data within this
-    // container can be read via anonymous request, but container data is not
-    // available. proxys cannot enumerate blobs within the container via
-    // anonymous request.
-    // If this value is not specified in the request, container data is
-    // private to the account owner.
+    
     $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
     // Set container metadata.
     $createContainerOptions->addMetaData("key1", "value1");
@@ -142,25 +129,25 @@ if (!isset($_GET["Cleanup"])) {
         # Upload file as a block blob
         // echo "Uploading BlockBlob: ".PHP_EOL;
         // echo $fileToUpload;
-        // echo "<br />";
+        echo "<br />";
         
         // $content = fopen($fileToUpload, "r");
         //Upload blob
 //         $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
 //         // List blobs.
-//         $listBlobsOptions = new ListBlobsOptions();
+        $listBlobsOptions = new ListBlobsOptions();
 //         $listBlobsOptions->setPrefix("HelloWorld");
-//         echo "These are the blobs present in the container: ";
-//         do{
-//             $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
-//             foreach ($result->getBlobs() as $blob)
-//             {
-//                 echo $blob->getName().": ".$blob->getUrl()."<br />";
-//             }
+        echo "These are the blobs present in the container: ";
+        do{
+            $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
+            foreach ($result->getBlobs() as $blob)
+            {
+                echo $blob->getName().": ".$blob->getUrl()."<br />";
+            }
         
-//             $listBlobsOptions->setContinuationToken($result->getContinuationToken());
-//         } while($result->getContinuationToken());
-//         echo "<br />";
+            $listBlobsOptions->setContinuationToken($result->getContinuationToken());
+        } while($result->getContinuationToken());
+        echo "<br />";
 //         // Get blob.
 //         echo "This is the content of the blob uploaded: ";
 //         $blob = $blobClient->getBlob($containerName, $fileToUpload);
