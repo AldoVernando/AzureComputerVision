@@ -116,7 +116,7 @@ if (!isset($_GET["Cleanup"])) {
     // Set container metadata.
     $createContainerOptions->addMetaData("key1", "value1");
     $createContainerOptions->addMetaData("key2", "value2");
-      $containerName = "blockblobs".generateRandomString();
+    $containerName = "blockblobs";
     try {
         // Create container.
         $blobClient->createContainer($containerName, $createContainerOptions);
@@ -142,7 +142,14 @@ if (!isset($_GET["Cleanup"])) {
             $result = $blobClient->listBlobs($containerName, $listBlobsOptions);
             foreach ($result->getBlobs() as $blob)
             {
-                echo $blob->getName().": ".$blob->getUrl()."<br />";
+                ?>
+                
+                <?php echo $blob->getName() ?>
+				<?php echo $blob->getUrl() ?>
+				
+				<input type="submit" name="submit" value="Analyze Image">
+
+                <?php
             }
         
             $listBlobsOptions->setContinuationToken($result->getContinuationToken());
