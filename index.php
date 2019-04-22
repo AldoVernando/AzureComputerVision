@@ -112,37 +112,19 @@ use MicrosoftAzure\Storage\Blob\Models\CreateContainerOptions;
 use MicrosoftAzure\Storage\Blob\Models\PublicAccessType;
 
 $connectionString = "DefaultEndpointsProtocol=https;AccountName=submission;AccountKey=m7qQe3NPr50h0VEdckYmQXo6rFBHTmU50g4yan9Aq+Ye+Gqg7tsUR/w1CPOJLUKlnNsz+bQ9sa/mEOxT29BLig==";
-// Create blob client.
+
 $blobClient = BlobRestProxy::createBlobService($connectionString);
-// if (!isset($_GET["Cleanup"])) {
-    // Create container options object.
-    // $createContainerOptions = new CreateContainerOptions();
-    
-    // $createContainerOptions->setPublicAccess(PublicAccessType::CONTAINER_AND_BLOBS);
-    // // Set container metadata.
-    // $createContainerOptions->addMetaData("key1", "value1");
-    // $createContainerOptions->addMetaData("key2", "value2");
-    $containerName = "blockblobs";
-        // Create container.
-        // $blobClient->createContainer($containerName, $createContainerOptions);
-        // Getting local file so that we can upload it to Azure.
-        // $myfile = fopen($fileToUpload, "w") or die("Unable to open file!");
-        // fclose($myfile);
-        
-        # Upload file as a block blob
-        // echo "Uploading BlockBlob: ".PHP_EOL;
-        // echo $fileToUpload;
+
+$containerName = "blockblobs";
+
         echo "<br />";
-        
-        // $content = fopen($fileToUpload, "r");
-        //Upload blob
+
         if (isset($_POST['submit'])) {
             $fileToUpload = strtolower($_FILES["fileUploaded"]["name"]);
             $content = fopen($_FILES["fileUploaded"]["name"], "r");
             $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
         }
-//         $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
-//         // List blobs.
+        
         $listBlobsOptions = new ListBlobsOptions();
         $listBlobsOptions->setPrefix("");
         echo "These are the blobs present in the container: ";
@@ -168,7 +150,7 @@ $blobClient = BlobRestProxy::createBlobService($connectionString);
                 <tr>
                     <td><?php echo $blob->getName() ?></td>
                     <td><?php echo $blob->getUrl() ?></td>
-                    <td><input type="submit" name="submit" value="Analyze Image"></td>
+                    <td><button name="submit" onclick="processImage()">Analyze Image</button></td>
                 </tr>
                 <?php
             }
@@ -178,7 +160,6 @@ $blobClient = BlobRestProxy::createBlobService($connectionString);
 
             <?php
 
-        
             $listBlobsOptions->setContinuationToken($result->getContinuationToken());
         } while($result->getContinuationToken());
         echo "<br />";
