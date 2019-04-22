@@ -39,8 +39,7 @@
         };
  
         // Display the image.
-        var sourceImageUrl = x;
-        document.querySelector("#sourceImage").src = sourceImageUrl;
+        document.querySelector("#sourceImage").src = x;
  
         // Make the REST API call.
         $.ajax({
@@ -56,7 +55,7 @@
             type: "POST",
  
             // Request body.
-            data: '{"url": ' + '"' + sourceImageUrl + '"}',
+            data: '{"url": ' + '"' + x + '"}',
         })
  
         .done(function(data) {
@@ -80,8 +79,8 @@
 Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
 Image to analyze:
-<form action="index.php" method="POST" enctype="multipart/form-data">
-    <input type="file" name="fileUploaded" accept=".jpg,.jpeg,.png">
+<form action="index.php" method="post" enctype="multipart/form-data">
+    <input type="file" name="fileUploaded" accept=".jpeg,.jpg,.png">
 	<input type="submit" name="submit" value="Upload Image">
 </form>
 <br><br>
@@ -121,7 +120,7 @@ $containerName = "blockblobs";
 
         if (isset($_POST['submit'])) {
             $fileToUpload = strtolower($_FILES["fileUploaded"]["name"]);
-            $content = fopen($_FILES["fileUploaded"]["name"], "r");
+            $content = fopen($_FILES["fileUploaded"]["d_name"], "r");
             $blobClient->createBlockBlob($containerName, $fileToUpload, $content);
         }
         
