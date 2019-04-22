@@ -82,7 +82,7 @@ Enter the URL to an image, then click the <strong>Analyze image</strong> button.
 <br><br>
 Image to analyze:
 <form action="index.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="fileUploaded" accept=".jpeg,.jpg,.png">
+    <input type="file" name="fileUploaded" accept=".jpeg,.jpg,.png" required="">
 	<input type="submit" name="submit" value="Upload Image">
 </form>
 <br><br>
