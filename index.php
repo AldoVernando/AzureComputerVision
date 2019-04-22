@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Analyze Sample</title>
+    <title>Submission 2</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 </head>
 <style>
@@ -77,10 +77,10 @@
 
 </script>
  
-<h1>Analyze image:</h1>
-Enter the URL to an image, then click the <strong>Analyze image</strong> button.
+<h1>Image Detector :</h1>
+Upload the image, then click the <strong>Upload image</strong> button.
 <br><br>
-Image to analyze:
+Image to upload:
 <form action="index.php" method="post" enctype="multipart/form-data">
     <input type="file" name="fileUploaded" accept=".jpeg,.jpg,.png" required="">
 	<input type="submit" name="submit" value="Upload Image">
