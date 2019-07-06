@@ -116,7 +116,7 @@ $connectionString = "DefaultEndpointsProtocol=https;AccountName=practiceazuresto
 
 $blobClient = BlobRestProxy::createBlobService($connectionString);
 
-$containerName = "blockblobs";
+$containerName = "images";
 
         echo "<br />";
 
